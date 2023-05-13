@@ -15,7 +15,8 @@ import java.security.Timestamp;
 public class Shipment {
 
     @Id
-    private String agreementId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer agreementId;
 
     private String approved;
 

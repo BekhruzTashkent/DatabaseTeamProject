@@ -14,9 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "store")
-public class Store{
+public class Store extends IdClass{
 
-    @Id
     private String storeUsername;
 
     private String storeAddress;
@@ -27,6 +26,7 @@ public class Store{
     private List<Bucket> buckets;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
     @JoinColumn(name = "username")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     MainUser mainUser;

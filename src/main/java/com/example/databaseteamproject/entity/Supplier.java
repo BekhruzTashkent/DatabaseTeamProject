@@ -14,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "supplier")
-public class Supplier{
+public class Supplier extends IdClass{
 
-    @Id
+
     private String supplierUsername;
 
     private String email;
@@ -30,10 +30,16 @@ public class Supplier{
     @JoinColumn(name = "id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     Product product;
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "username")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    MainUser mainUser;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
     @JoinColumn(name = "username")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    MainUser mainUser;
+    private MainUser mainUser;
 
 }
