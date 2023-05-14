@@ -2,6 +2,7 @@ package com.example.databaseteamproject.entity;
 
 
 import com.example.databaseteamproject.entity.template.IdClass;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "category")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
 
     @Id
@@ -23,9 +25,16 @@ public class Category {
 
     private String name;
 
+//    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Product> productList;
 
-    @ManyToMany(mappedBy = "category")
-    private Set<Producer> producerSet = new HashSet<>();
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "company_name")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private Producer producer;
+
+    @ManyToOne
+    private Producer producer;
 
 
 }

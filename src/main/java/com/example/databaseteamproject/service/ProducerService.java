@@ -48,7 +48,7 @@ public class ProducerService {
         producer.setCountry(byId.get());
         Producer save = producerRepository.save(producer);
 
-        return new ApiResponse("saved with id: "+save.getCountryName(), true);
+        return new ApiResponse("saved with id: "+save.getCompanyName(), true);
     }
 
 

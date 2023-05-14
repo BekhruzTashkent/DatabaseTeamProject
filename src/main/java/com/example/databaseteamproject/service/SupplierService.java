@@ -1,10 +1,10 @@
 package com.example.databaseteamproject.service;
 
 
+import com.example.databaseteamproject.entity.Product;
 import com.example.databaseteamproject.entity.Supplier;
 import com.example.databaseteamproject.payload.ApiResponse;
 import com.example.databaseteamproject.payload.SupplierDto;
-import com.example.databaseteamproject.repository.MainUserRepository;
 import com.example.databaseteamproject.repository.ProductRepository;
 import com.example.databaseteamproject.repository.SupplierRepository;
 import jakarta.validation.Valid;
@@ -25,8 +25,6 @@ public class SupplierService {
     @Autowired
     ProductRepository productRepository;
 
-    @Autowired
-    MainUserRepository mainUserRepository;
 
     public List<Supplier> getAll(){
         return supplierRepository.findAll();
@@ -35,17 +33,34 @@ public class SupplierService {
 
     public Supplier getById(String id){
         Optional<Supplier> byId = supplierRepository.findById(id);
+
         return byId.orElse(null);
     }
 
     public ApiResponse addSupplier(@Valid SupplierDto supplierDto){
+
+//        Optional<MainUser> byId = mainUserRepository.findById(supplierDto.getUsername());
+//        if(byId.isEmpty()){
+//            return new ApiResponse("no such account", false);
+//        }
+
+//        Optional<Product> byId1 = productRepository.findById(supplierDto.getProductId());
+//        if(byId1.isEmpty()){
+//            return new ApiResponse("no such product id", false);
+//        }
+
+
         Supplier supplier = new Supplier();
-        supplier.setSupplierUsername(supplierDto.getSupplierUsername());
-        supplier.setEmail(supplierDto.getEmail());
+        supplier.setUsername(supplierDto.getUsername());
+        supplier.setAddress(supplierDto.getAddress());
+        supplier.setFirstName(supplierDto.getFirstName());
+        supplier.setLastName(supplierDto.getLastName());
+        supplier.setOrganizationNumber(supplierDto.getOrganizationNumber());
         supplier.setPhoneNumber(supplierDto.getPhoneNumber());
+
         Supplier save = supplierRepository.save(supplier);
 
-        return new ApiResponse("saved with id: "+save.getSupplierUsername(), true);
+        return new ApiResponse("saved with id: "+save.getUsername(), true);
     }
 
 

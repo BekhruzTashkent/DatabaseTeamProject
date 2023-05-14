@@ -13,4 +13,11 @@ public class ProductDto {
 
     private String sectionId;
 
+    private String supplier;
+
+
+
+//    public ProductDto(String productName, Integer price, Integer amount) {
+//
+//    }
 }

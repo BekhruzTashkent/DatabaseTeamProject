@@ -46,7 +46,7 @@ public class CategoryService {
         Category category = new Category();
         category.setSectionId(categoryDto.getSectionId());
         category.setName(categoryDto.getName());
-        category.setProducerSet((Set<Producer>) byId.get());
+        category.setProducer(byId.get());
         Category save = categoryRepository.save(category);
 
         return new ApiResponse("saved with id: "+save.getSectionId(), true);

@@ -1,6 +1,5 @@
 package com.example.databaseteamproject.service;
 
-
 import com.example.databaseteamproject.entity.Store;
 import com.example.databaseteamproject.payload.ApiResponse;
 import com.example.databaseteamproject.payload.StoreDto;
@@ -32,15 +31,31 @@ public class StoreService {
 
     public ApiResponse addStore(@Valid StoreDto storeDto){
 
+//        Optional<MainUser> byUsername = mainUserRepository.findByUsername(storeDto.getUsername());
+//        if(byUsername.isPresent()){
+//            return new ApiResponse("username already exist", false);
+//        }
 
+//        MainUser mainUser = new MainUser();
+//        mainUser.setUsername(storeDto.getUsername());
+//        mainUser.setPassword(storeDto.getPassword());
+//        mainUser.setFirstName(storeDto.getFirstName());
+//        mainUser.setLastName(storeDto.getLastName());
+//        mainUser.setAddress(storeDto.getAddress());
+//        mainUser.setPhoneNumber(storeDto.getPhoneNumber());
+//        MainUser save1 = mainUserRepository.save(mainUser);
 
-        Store qa = new Store();
-        qa.setStoreUsername(storeDto.getStoreUsername());
-        qa.setStoreAddress(storeDto.getStoreAddress());
-        qa.setStoreNumber(storeDto.getStoreNumber());
-        Store save = qaRepository.save(qa);
+        Store store = new Store();
+        store.setUsername(storeDto.getUsername());
+        store.setPassword(storeDto.getPassword());
+        store.setFirstName(storeDto.getFirstName());
+        store.setLastName(storeDto.getLastName());
+        store.setStoreAddress(storeDto.getAddress());
+        store.setStoreNumber(storeDto.getOrganizationNumber());
+        store.setPhoneNumber(storeDto.getPhoneNumber());
+        Store save = qaRepository.save(store);
 
-        return new ApiResponse("saved with id: "+save.getStoreUsername(), true);
+        return new ApiResponse("saved with id: "+save.getUsername(), true);
     }
 
 

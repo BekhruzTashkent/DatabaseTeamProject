@@ -11,7 +11,7 @@ public class ShipmentDetailDto {
 
     private String distance;
 
-    private Timestamp time;
+    private String time;
 
     private Integer agreementId;
 

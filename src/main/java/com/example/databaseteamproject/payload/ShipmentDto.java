@@ -9,7 +9,7 @@ public class ShipmentDto {
 
     private String approved;
 
-    private Timestamp date;
+    private String date;
 
     private String shipmentType;
 

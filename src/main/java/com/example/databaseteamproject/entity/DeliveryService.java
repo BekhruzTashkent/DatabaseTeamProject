@@ -2,6 +2,7 @@ package com.example.databaseteamproject.entity;
 
 
 import com.example.databaseteamproject.entity.template.IdClass;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DeliveryService{
 
     @Id
@@ -19,9 +21,11 @@ public class DeliveryService{
 
     private String price;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "certified")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    ShipmentDetail shipmentDetail;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "certified")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    ShipmentDetail shipmentDetail;
 
+    @ManyToOne
+    ShipmentDetail shipmentDetail;
 }

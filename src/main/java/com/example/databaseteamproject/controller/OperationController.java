@@ -1,9 +1,9 @@
 package com.example.databaseteamproject.controller;
 
-import com.example.databaseteamproject.entity.Bucket;
+import com.example.databaseteamproject.entity.Operation;
 import com.example.databaseteamproject.payload.ApiResponse;
-import com.example.databaseteamproject.payload.BucketDto;
-import com.example.databaseteamproject.service.BucketService;
+import com.example.databaseteamproject.payload.OperationDto;
+import com.example.databaseteamproject.service.OperationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -16,32 +16,34 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/operation")
-public class BucketController {
+public class OperationController {
+
+
     @Autowired
-    BucketService bucketService;
+    OperationService operationService;
 
     @GetMapping
     public HttpEntity<?> findAll(){
-        List<Bucket> all = bucketService.getAll();
+        List<Operation> all = operationService.getAll();
         return new ResponseEntity<>(all, HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public HttpEntity<?> getById(@PathVariable Integer id){
-        Bucket byId = bucketService.getById(id);
+        Operation byId = operationService.getById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public HttpEntity<?> add(@RequestBody BucketDto bucketDto){
-        ApiResponse apiResponse = bucketService.addQA(bucketDto);
+    public HttpEntity<?> add(@RequestBody OperationDto operationDto){
+        ApiResponse apiResponse = operationService.addQA(operationDto);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
 
     @DeleteMapping("/delete/{id}")
     public HttpEntity<?> deleteQA(@PathVariable Integer id){
-        ApiResponse apiResponse = bucketService.deleteQA(id);
+        ApiResponse apiResponse = operationService.deleteQA(id);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

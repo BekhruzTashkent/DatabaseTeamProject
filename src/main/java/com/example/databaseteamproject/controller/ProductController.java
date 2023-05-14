@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public HttpEntity<?> getById(@PathVariable Integer id){
+    public HttpEntity<?> getById(@PathVariable Long id){
         Product byId = roomService.getById(id);
         return new ResponseEntity<>(byId, HttpStatus.OK);
     }
@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public HttpEntity<?> deleteQA(@PathVariable Integer id){
+    public HttpEntity<?> deleteQA(@PathVariable Long id){
         ApiResponse apiResponse = roomService.deleteQA(id);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }

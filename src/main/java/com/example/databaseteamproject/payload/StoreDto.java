@@ -5,10 +5,20 @@ import lombok.Data;
 @Data
 public class StoreDto {
 
-    private String storeUsername;
 
-    private String storeAddress;
+    private String username;
 
-    private String storeNumber;
+    private String organizationNumber;
+
+    private String password;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String address;
+
+    private String phoneNumber;
+
 
 }

@@ -3,11 +3,13 @@ package com.example.databaseteamproject.service;
 
 import com.example.databaseteamproject.entity.Category;
 import com.example.databaseteamproject.entity.Product;
+import com.example.databaseteamproject.entity.Supplier;
 import com.example.databaseteamproject.payload.ApiResponse;
 import com.example.databaseteamproject.payload.ProductDto;
 import com.example.databaseteamproject.repository.CategoryRepository;
 import com.example.databaseteamproject.repository.ProducerRepository;
 import com.example.databaseteamproject.repository.ProductRepository;
+import com.example.databaseteamproject.repository.SupplierRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,14 @@ public class ProductService {
 
     private final CategoryRepository categoryRepository;
 
+    private final SupplierRepository supplierRepository;
+
     public List<Product> getAll(){
         return productRepository.findAll();
 
     }
 
-    public Product getById(Integer id){
+    public Product getById(Long id){
         Optional<Product> byId = productRepository.findById(id);
         return byId.orElse(null);
     }
@@ -42,17 +46,23 @@ public class ProductService {
             return new ApiResponse("no such category", false);
         }
 
+        Optional<Supplier> byId1 = supplierRepository.findById(productDto.getSupplier());
+        if(byId1.isEmpty()){
+            return new ApiResponse("no such supplier", false);
+        }
+
         Product product = new Product();
         product.setProductName(productDto.getProductName());
         product.setPrice(productDto.getPrice());
         product.setAmount(productDto.getAmount());
         product.setCategory(byId.get());
+        product.setSupplier(byId1.get());
         Product save = productRepository.save(product);
 
         return new ApiResponse("saved with id: "+save.getId(), true);
     }
 
-    public ApiResponse deleteQA(Integer id){
+    public ApiResponse deleteQA(Long id){
 
         Optional<Product> byId = productRepository.findById(id);
         if (byId.isEmpty()) {

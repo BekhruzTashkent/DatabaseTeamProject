@@ -1,5 +1,6 @@
 package com.example.databaseteamproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import java.security.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "shipment")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Shipment {
 
     @Id
@@ -20,19 +22,15 @@ public class Shipment {
 
     private String approved;
 
-    private Timestamp date;
+    private String date;
 
     private boolean certified = true;
 
     private String shipmentType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "supplier_username")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
     private Supplier supplier;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "store_username")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne
     private Store store;
 }

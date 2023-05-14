@@ -2,19 +2,19 @@ package com.example.databaseteamproject.entity;
 
 
 import com.example.databaseteamproject.entity.template.IdClass;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "producer")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Producer {
 
     @Id
@@ -27,12 +27,8 @@ public class Producer {
     @ManyToOne
     Country country;
 
-    @ManyToMany
-    @JoinTable(
-            name = "produces",
-            joinColumns = @JoinColumn(name = "company_name"),
-            inverseJoinColumns = @JoinColumn(name = "section_id"))
-    private Set<Category> category = new HashSet<>();
+//    @OneToMany(mappedBy = "producer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Category> categoryList;
 
 
 }

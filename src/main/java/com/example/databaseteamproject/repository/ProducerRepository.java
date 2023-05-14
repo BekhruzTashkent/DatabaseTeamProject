@@ -1,6 +1,6 @@
 package com.example.databaseteamproject.repository;
 
-import com.example.databaseteamproject.entity.Bucket;
+
 import com.example.databaseteamproject.entity.Producer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
